@@ -1,0 +1,24 @@
+name: 'load-eef-action'
+description: 'This action will take the last release assets of ESPEasyFlasher_2.0 and will add eep packages.'
+inputs:
+  target-os: # ID of the target OS
+    description: 'Name of the target OS can be all or win64/linux64/linuxarm64/linuxarmv7/macos12/macos14'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Set GitHub Path
+      run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
+      shell: bash
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
+    - name: Run start_action.sh
+      run: start_action.sh
+      shell: bash
+      env:
+        INPUT_TARGET: ${{ inputs.target-os }}
+    # - uses: actions/upload-artifact@v4
+    #   with:
+    #     name: ${{inputs.core}}_${{inputs.board}}_${{inputs.sketch-name}}.zip
+    #     path: ./EEP/*
+    
