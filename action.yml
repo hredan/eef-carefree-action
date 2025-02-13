@@ -19,10 +19,8 @@ runs:
         path: ./artifacts
         merge-multiple: false
     - name: Check artifacts
+      shell: bash
       run: |
-        cd ./artifacts
-        ls -Rla
-    - run: |
           pwd
           ls -Rla
     # - name: Run start_action.sh
