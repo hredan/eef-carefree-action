@@ -12,11 +12,24 @@ runs:
       shell: bash
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
-    - name: Run start_action.sh
-      run: start_action.sh
-      shell: bash
-      env:
-        INPUT_TARGET: ${{ inputs.target-os }}
+    - uses: actions/checkout@v4
+    - name: download all artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: ./artifacts
+        merge-multiple: false
+    - name: Check artifacts
+      run: |
+        cd ./artifacts
+        ls -Rla
+    - run: |
+          pwd
+          ls -Rla
+    # - name: Run start_action.sh
+    #   run: start_action.sh
+    #   shell: bash
+    #   env:
+    #     INPUT_TARGET: ${{ inputs.target-os }}
     # - uses: actions/upload-artifact@v4
     #   with:
     #     name: ${{inputs.core}}_${{inputs.board}}_${{inputs.sketch-name}}.zip

@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-EEF_VERSION="v1.0.1"
+EEF_VERSION="v1.0.5"
 
 HELP="Paramter:\n
 -t\tTARGET all/win64/linux64/linuxarm64/linuxarmv7/macos12/macos14\n
@@ -10,8 +10,8 @@ ARCHIVE_WIN64="espeasyflasher_win64.zip"
 ARCHIVE_LINUX64="ESPEasyFlasher_linux_x64.tar.gz"
 ARCHIVE_LINUXARM64="ESPEasyFlasher_linux_arm64.tar.gz"
 ARCHIVE_LINUXARMV7="ESPEasyFlasher_linux_armv7.tar.gz"
-ARCHIVE_MACOS12="ESPEasyFlasher_macOs12_intel.tar.gz"
-ARCHIVE_MACOS14="ESPEasyFlasher_macOs14_arm64.tar.gz"
+ARCHIVE_MACOS_INTEL="ESPEasyFlasher_macOs_intel.tar.gz"
+ARCHIVE_MACOS_ARM="ESPEasyFlasher_macOs_arm64.tar.gz"
 
 ARCHIVES="./Archives"
 TEMP_DIR="./Temp"
@@ -57,7 +57,6 @@ if [ -z $TARGET ]; then
     exit 1
 fi
 
-mkdir -p $WITH_PAYLOAD
 mkdir -p $WITH_PAYLOAD
 
 if [ $TARGET = "linux64" ] || [ $TARGET = "all" ]; then
