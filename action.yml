@@ -23,11 +23,11 @@ runs:
       run: |
           pwd
           ls -Rla
-    # - name: Run start_action.sh
-    #   run: start_action.sh
-    #   shell: bash
-    #   env:
-    #     INPUT_TARGET: ${{ inputs.target-os }}
+    - name: Run start_action.sh
+      run: start_action.sh
+      shell: bash
+      env:
+        INPUT_TARGET: ${{ inputs.target-os }}
     # - uses: actions/upload-artifact@v4
     #   with:
     #     name: ${{inputs.core}}_${{inputs.board}}_${{inputs.sketch-name}}.zip
