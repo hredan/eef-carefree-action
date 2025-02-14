@@ -16,6 +16,7 @@ runs:
     - name: download all artifacts
       uses: actions/download-artifact@v4
       with:
+        pattern: esp*
         path: ./artifacts
         merge-multiple: false
     - name: Check artifacts
