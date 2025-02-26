@@ -29,8 +29,13 @@ runs:
       shell: bash
       env:
         INPUT_TARGET: ${{ inputs.target-os }}
+    - name: Get Repo name
+      id: get_repo_name
+      run: |
+        REPO_NAME="$( basename `git rev-parse --show-toplevel` )"
+        echo "repo_name=$REPO_NAME" >> $GITHUB_OUTPUT
     - uses: actions/upload-artifact@v4
       with:
-        name: EEF-packages
+        name: EEF-packages-${{ steps.get_repo_name.outputs.repo_name }}
         path: ./EEF_Packages/*
     
