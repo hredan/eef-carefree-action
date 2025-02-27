@@ -13,6 +13,20 @@ EEF_PACKAGE_DIR="./EEF_Packages"
 
 EEP_PACKAGE_DIR=eep_packages
 
+BASE_NAME_WIN64="ESPEasyFlasher_win64"
+BASE_NAME_LINUX64="ESPEasyFlasher_linux_x64"
+BASE_NAME_LINUXARM64="ESPEasyFlasher_linux_arm64"
+BASE_NAME_LINUXARMV7="ESPEasyFlasher_linux_armv7"
+BASE_NAME_MACOS_INTEL="ESPEasyFlasher_macOS_intel"
+BASE_NAME_MACOS_ARM="ESPEasyFlasher_macOS_arm64"
+
+ARCHIVE_WIN64="$BASE_NAME_WIN64.zip"
+ARCHIVE_LINUX64="$BASE_NAME_LINUX64.tar.gz"
+ARCHIVE_LINUXARM64="$BASE_NAME_LINUXARM64.tar.gz"
+ARCHIVE_LINUXARMV7="$BASE_NAME_LINUXARMV7.tar.gz"
+ARCHIVE_MACOS_INTEL="$BASE_NAME_MACOS_INTEL.tar.gz"
+ARCHIVE_MACOS_ARM="$BASE_NAME_MACOS_ARM.tar.gz"
+
 ## function to download eef assets
 downloadArchives () {
     mkdir -p $ARCHIVES
@@ -75,14 +89,6 @@ if [ -z $NAME ]; then
     exit 1
 fi
 
-# set archive names
-ARCHIVE_WIN64="ESPEasyFlasher_win64_$NAME.zip"
-ARCHIVE_LINUX64="ESPEasyFlasher_linux_x64_$NAME.tar.gz"
-ARCHIVE_LINUXARM64="ESPEasyFlasher_linux_arm64_$NAME.tar.gz"
-ARCHIVE_LINUXARMV7="ESPEasyFlasher_linux_armv7_$NAME.tar.gz"
-ARCHIVE_MACOS_INTEL="ESPEasyFlasher_macOS_intel_$NAME.tar.gz"
-ARCHIVE_MACOS_ARM="ESPEasyFlasher_macOS_arm64_$NAME.tar.gz"
-
 # cleanup if exists
 rm -fr ./$EEP_PACKAGE_DIR
 rm -fr ./$EEF_PACKAGE_DIR
@@ -110,7 +116,7 @@ if [ $TARGET = "linux_x64" ] || [ $TARGET = "all" ]; then
     downloadExtractGz $ARCHIVE_LINUX64
     cp ./$EEP_PACKAGE_DIR/*.eep $TEMP_DIR/ESP_Packages
     addLogoAndConfig $TEMP_DIR/ESP_Packages
-    tar -czf ${EEF_PACKAGE_DIR}/${ARCHIVE_LINUX64} -C $TEMP_DIR .
+    tar -czf ${EEF_PACKAGE_DIR}/${BASE_NAME_LINUX64}_${NAME}.tar.gz -C $TEMP_DIR .
 fi
 
 if [ $TARGET = "linux_arm64" ] || [ $TARGET = "all" ]; then
@@ -118,7 +124,7 @@ if [ $TARGET = "linux_arm64" ] || [ $TARGET = "all" ]; then
     downloadExtractGz $ARCHIVE_LINUXARM64
     cp ./$EEP_PACKAGE_DIR/*.eep $TEMP_DIR/ESPEasyFlasher/ESP_Packages
     addLogoAndConfig $TEMP_DIR/ESPEasyFlasher
-    tar -czf ${EEF_PACKAGE_DIR}/${ARCHIVE_LINUXARM64} -C $TEMP_DIR .
+    tar -czf ${EEF_PACKAGE_DIR}/${BASE_NAME_LINUXARM64}_${NAME}.tar.gz -C $TEMP_DIR .
 fi
 
 if [ $TARGET = "linux_armv7" ] || [ $TARGET = "all" ]; then
@@ -126,7 +132,7 @@ if [ $TARGET = "linux_armv7" ] || [ $TARGET = "all" ]; then
     downloadExtractGz $ARCHIVE_LINUXARMV7
     cp ./$EEP_PACKAGE_DIR/*.eep $TEMP_DIR/ESPEasyFlasher/ESP_Packages
     addLogoAndConfig $TEMP_DIR/ESPEasyFlasher
-    tar -czf ${EEF_PACKAGE_DIR}/${ARCHIVE_LINUXARMV7} -C $TEMP_DIR .
+    tar -czf ${EEF_PACKAGE_DIR}/${BASE_NAME_LINUXARMV7}_${NAME}.tar.gz -C $TEMP_DIR .
 fi
 
 if [ $TARGET = "macos_intel" ] || [ $TARGET = "all" ]; then
@@ -134,7 +140,7 @@ if [ $TARGET = "macos_intel" ] || [ $TARGET = "all" ]; then
     downloadExtractGz $ARCHIVE_MACOS_INTEL
     cp ./$EEP_PACKAGE_DIR/*.eep $TEMP_DIR/ESPEasyFlasher.app/Contents/MacOS/ESP_Packages
     addLogoAndConfig $TEMP_DIR/ESPEasyFlasher.app/Contents/MacOS
-    tar -czf ${EEF_PACKAGE_DIR}/${ARCHIVE_MACOS_INTEL} -C $TEMP_DIR .
+    tar -czf ${EEF_PACKAGE_DIR}/${BASE_NAME_MACOS_INTEL}_${NAME}.tar.gz -C $TEMP_DIR .
 fi
 
 if [ $TARGET = "macos_arm64" ] || [ $TARGET = "all" ]; then
@@ -142,7 +148,7 @@ if [ $TARGET = "macos_arm64" ] || [ $TARGET = "all" ]; then
     downloadExtractGz $ARCHIVE_MACOS_ARM
     cp ./$EEP_PACKAGE_DIR/*.eep $TEMP_DIR/ESPEasyFlasher.app/Contents/MacOS/ESP_Packages
     addLogoAndConfig $TEMP_DIR/ESPEasyFlasher.app/Contents/MacOS
-    tar -czf ${EEF_PACKAGE_DIR}/${ARCHIVE_MACOS_ARM} -C $TEMP_DIR .
+    tar -czf ${EEF_PACKAGE_DIR}/${BASE_NAME_MACOS_ARM}_${NAME}.tar.gz -C $TEMP_DIR .
 fi
 
 if [ $TARGET = "win64" ] || [ $TARGET = "all" ]; then
@@ -151,6 +157,6 @@ if [ $TARGET = "win64" ] || [ $TARGET = "all" ]; then
     cp ./$EEP_PACKAGE_DIR/*.eep $TEMP_DIR/ESPEasyFlasher/ESP_Packages
     addLogoAndConfig $TEMP_DIR/ESPEasyFlasher
     cd $TEMP_DIR
-    zip -r ../${EEF_PACKAGE_DIR}/${ARCHIVE_WIN64} ./ESPEasyFlasher
+    zip -r ../${EEF_PACKAGE_DIR}/${BASE_NAME_WIN64}_${NAME}.zip ./ESPEasyFlasher
     cd ..
 fi
