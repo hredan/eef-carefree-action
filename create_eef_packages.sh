@@ -19,7 +19,7 @@ downloadArchives () {
     LINK="https://github.com/hredan/ESPEASYFLASHER_2.0/releases/download/${EEF_VERSION}/$1"
     # curl -kLSs $LINK -o ./Targets/$1 # -k: allow insecure server connections when using SSL -s: silent mode -S: show error
     if [ ! -f ${ARCHIVES}/$1 ]; then
-        curl -L $LINK -o ${ARCHIVES}/$1
+        curl -fL $LINK -o ${ARCHIVES}/$1
     fi
 }
 
