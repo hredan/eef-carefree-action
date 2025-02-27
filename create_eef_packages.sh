@@ -13,15 +13,6 @@ EEF_PACKAGE_DIR="./EEF_Packages"
 
 EEP_PACKAGE_DIR=eep_packages
 
-setArchiveNames () {
-    ARCHIVE_WIN64="ESPEasyFlasher_win64_$NAME.zip"
-    ARCHIVE_LINUX64="ESPEasyFlasher_linux_x64_$NAME.tar.gz"
-    ARCHIVE_LINUXARM64="ESPEasyFlasher_linux_arm64_$NAME.tar.gz"
-    ARCHIVE_LINUXARMV7="ESPEasyFlasher_linux_armv7_$NAME.tar.gz"
-    ARCHIVE_MACOS_INTEL="ESPEasyFlasher_macOS_intel_$NAME.tar.gz"
-    ARCHIVE_MACOS_ARM="ESPEasyFlasher_macOS_arm64_$NAME.tar.gz"
-}
-
 ## function to download eef assets
 downloadArchives () {
     mkdir -p $ARCHIVES
@@ -79,7 +70,12 @@ if [ -z $NAME ]; then
 fi
 
 # set archive names
-setArchiveNames
+ARCHIVE_WIN64="ESPEasyFlasher_win64_$NAME.zip"
+ARCHIVE_LINUX64="ESPEasyFlasher_linux_x64_$NAME.tar.gz"
+ARCHIVE_LINUXARM64="ESPEasyFlasher_linux_arm64_$NAME.tar.gz"
+ARCHIVE_LINUXARMV7="ESPEasyFlasher_linux_armv7_$NAME.tar.gz"
+ARCHIVE_MACOS_INTEL="ESPEasyFlasher_macOS_intel_$NAME.tar.gz"
+ARCHIVE_MACOS_ARM="ESPEasyFlasher_macOS_arm64_$NAME.tar.gz"
 
 # cleanup if exists
 rm -fr ./$EEP_PACKAGE_DIR
