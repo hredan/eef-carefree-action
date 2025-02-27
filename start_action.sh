@@ -3,6 +3,7 @@ SCRIPT_DIR=${BASH_SOURCE[0]%/*}
 PARAMS=""
 
 echo Target: $INPUT_TARGET
+echo Repo: $INPUT_REPO
 echo Script dir: $SCRIPT_DIR
 echo $PWD
 

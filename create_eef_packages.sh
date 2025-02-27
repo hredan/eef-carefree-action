@@ -4,7 +4,8 @@ EEF_VERSION="v1.0.5"
 
 HELP="Paramter:\n
 -t\tTARGET all/win64/linux64/linuxarm64/linuxarmv7/macos12/macos14\n
-e.g. ./eef_payload.sh -t all\n"
+-n\tNAME e.g. can be the name of Repository
+e.g. ./eef_payload.sh -t all -n My_Project\n"
 
 ARCHIVE_WIN64="ESPEasyFlasher_win64.zip"
 ARCHIVE_LINUX64="ESPEasyFlasher_linux_x64.tar.gz"
@@ -56,15 +57,21 @@ addLogoAndConfig () {
     fi
 }
 
-while getopts t:h flag
+while getopts t:n:h flag
 do
     case "${flag}" in
         t) TARGET=${OPTARG};;
+        n) NAME=${OPTARG};;
 		h) echo -e $HELP; exit 0;
     esac
 done
 
 if [ -z $TARGET ]; then
+    echo -e $HELP
+    exit 1
+fi
+
+if [ -z $NAME ]; then
     echo -e $HELP
     exit 1
 fi
@@ -96,7 +103,7 @@ if [ $TARGET = "linux_x64" ] || [ $TARGET = "all" ]; then
     downloadExtractGz $ARCHIVE_LINUX64
     cp ./$EEP_PACKAGE_DIR/*.eep $TEMP_DIR/ESP_Packages
     addLogoAndConfig $TEMP_DIR/ESP_Packages
-    tar -czf ${EEF_PACKAGE_DIR}/${ARCHIVE_LINUX64} -C $TEMP_DIR .
+    tar -czf ${EEF_PACKAGE_DIR}/${ARCHIVE_LINUX64}_$NAME -C $TEMP_DIR .
 fi
 
 if [ $TARGET = "linux_arm64" ] || [ $TARGET = "all" ]; then
@@ -104,7 +111,7 @@ if [ $TARGET = "linux_arm64" ] || [ $TARGET = "all" ]; then
     downloadExtractGz $ARCHIVE_LINUXARM64
     cp ./$EEP_PACKAGE_DIR/*.eep $TEMP_DIR/ESPEasyFlasher/ESP_Packages
     addLogoAndConfig $TEMP_DIR/ESPEasyFlasher
-    tar -czf ${EEF_PACKAGE_DIR}/${ARCHIVE_LINUXARM64} -C $TEMP_DIR .
+    tar -czf ${EEF_PACKAGE_DIR}/${ARCHIVE_LINUXARM64}_$NAME -C $TEMP_DIR .
 fi
 
 if [ $TARGET = "linux_armv7" ] || [ $TARGET = "all" ]; then
@@ -112,7 +119,7 @@ if [ $TARGET = "linux_armv7" ] || [ $TARGET = "all" ]; then
     downloadExtractGz $ARCHIVE_LINUXARMV7
     cp ./$EEP_PACKAGE_DIR/*.eep $TEMP_DIR/ESPEasyFlasher/ESP_Packages
     addLogoAndConfig $TEMP_DIR/ESPEasyFlasher
-    tar -czf ${EEF_PACKAGE_DIR}/${ARCHIVE_LINUXARMV7} -C $TEMP_DIR .
+    tar -czf ${EEF_PACKAGE_DIR}/${ARCHIVE_LINUXARMV7}_$NAME -C $TEMP_DIR .
 fi
 
 if [ $TARGET = "macos_intel" ] || [ $TARGET = "all" ]; then
@@ -120,7 +127,7 @@ if [ $TARGET = "macos_intel" ] || [ $TARGET = "all" ]; then
     downloadExtractGz $ARCHIVE_MACOS_INTEL
     cp ./$EEP_PACKAGE_DIR/*.eep $TEMP_DIR/ESPEasyFlasher.app/Contents/MacOS/ESP_Packages
     addLogoAndConfig $TEMP_DIR/ESPEasyFlasher.app/Contents/MacOS
-    tar -czf ${EEF_PACKAGE_DIR}/${ARCHIVE_MACOS_INTEL} -C $TEMP_DIR .
+    tar -czf ${EEF_PACKAGE_DIR}/${ARCHIVE_MACOS_INTEL}_$NAME -C $TEMP_DIR .
 fi
 
 if [ $TARGET = "macos_arm64" ] || [ $TARGET = "all" ]; then
@@ -128,7 +135,7 @@ if [ $TARGET = "macos_arm64" ] || [ $TARGET = "all" ]; then
     downloadExtractGz $ARCHIVE_MACOS_ARM
     cp ./$EEP_PACKAGE_DIR/*.eep $TEMP_DIR/ESPEasyFlasher.app/Contents/MacOS/ESP_Packages
     addLogoAndConfig $TEMP_DIR/ESPEasyFlasher.app/Contents/MacOS
-    tar -czf ${EEF_PACKAGE_DIR}/${ARCHIVE_MACOS_ARM} -C $TEMP_DIR .
+    tar -czf ${EEF_PACKAGE_DIR}/${ARCHIVE_MACOS_ARM}_$NAME -C $TEMP_DIR .
 fi
 
 if [ $TARGET = "win64" ] || [ $TARGET = "all" ]; then
@@ -137,6 +144,6 @@ if [ $TARGET = "win64" ] || [ $TARGET = "all" ]; then
     cp ./$EEP_PACKAGE_DIR/*.eep $TEMP_DIR/ESPEasyFlasher/ESP_Packages
     addLogoAndConfig $TEMP_DIR/ESPEasyFlasher
     cd $TEMP_DIR
-    zip -r ../${EEF_PACKAGE_DIR}/${ARCHIVE_WIN64} ./ESPEasyFlasher
+    zip -r ../${EEF_PACKAGE_DIR}/${ARCHIVE_WIN64}_$NAME ./ESPEasyFlasher
     cd ..
 fi
