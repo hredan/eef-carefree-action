@@ -12,9 +12,9 @@ runs:
       shell: bash
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: download all artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         pattern: esp*
         path: ./artifacts
@@ -37,7 +37,7 @@ runs:
         REPO_NAME: ${{ steps.get_repo_name.outputs.repo_name }}
       run: start_action.sh
       
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       with:
         name: EEF-packages-${{ steps.get_repo_name.outputs.repo_name }}
         path: ./EEF_Packages/*
