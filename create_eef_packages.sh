@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-EEF_VERSION="v1.0.5"
+EEF_VERSION="v1.1.0"
 
 HELP="Paramter:\n
 -t\tTARGET all/win64/linux64/linuxarm64/linuxarmv7/macos12/macos14\n
