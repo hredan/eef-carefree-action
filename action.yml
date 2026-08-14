@@ -24,13 +24,21 @@ runs:
       run: |
           pwd
           ls -Rla
+    - name: Get Repo name
+      id: get_repo_name
+      shell: bash
+      run: |
+        REPO_NAME="$( basename `git rev-parse --show-toplevel` )"
+        echo "repo_name=$REPO_NAME" >> $GITHUB_OUTPUT
     - name: Run start_action.sh
-      run: start_action.sh
       shell: bash
       env:
         INPUT_TARGET: ${{ inputs.target-os }}
+        REPO_NAME: ${{ steps.get_repo_name.outputs.repo_name }}
+      run: start_action.sh
+      
     - uses: actions/upload-artifact@v7
       with:
-        name: EEF-packages
+        name: EEF-packages-${{ steps.get_repo_name.outputs.repo_name }}
         path: ./EEF_Packages/*
     
