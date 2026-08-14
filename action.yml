@@ -1,5 +1,8 @@
 name: 'load-eef-action'
 description: 'This action will take the last release assets of ESPEasyFlasher_2.0 and will add eep packages.'
+branding:
+  icon: 'award'
+  color: 'orange'
 inputs:
   target-os: # ID of the target OS
     description: 'Name of the target OS can be all or win64/linux_x64/linux_arm64/linux_armv7/macos_intel/macos_arm64'
