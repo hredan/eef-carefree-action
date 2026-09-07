@@ -22,7 +22,7 @@ runs:
         pattern: esp*
         path: ./artifacts
         merge-multiple: false
-        skip-decompression: true
+        skip-decompress: true
     - name: Check artifacts
       shell: bash
       run: |
