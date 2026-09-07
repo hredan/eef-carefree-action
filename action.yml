@@ -22,11 +22,12 @@ runs:
         pattern: esp*
         path: ./artifacts
         merge-multiple: false
+        skip-decompress: true
     - name: Check artifacts
       shell: bash
       run: |
           pwd
-          ls -Rla
+          ls -Rla ./artifacts
     - name: Get Repo name
       id: get_repo_name
       shell: bash
