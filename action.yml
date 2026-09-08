@@ -21,7 +21,6 @@ runs:
       with:
         pattern: esp*
         path: ./artifacts
-        merge-multiple: false
         skip-decompress: true
     - name: Check artifacts
       shell: bash
