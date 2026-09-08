@@ -98,7 +98,7 @@ rm -fr ./$TEMP_DIR
 if [ -d ./artifacts ]; then
     mkdir -p ./$EEP_PACKAGE_DIR
     cd ./artifacts
-    for file in *.zip; do
+    for file in **/*.zip; do
         base_name=$(basename "$file" ".zip")
         cp "$file" "../$EEP_PACKAGE_DIR/$base_name.eep"
     done
