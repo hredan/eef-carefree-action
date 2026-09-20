@@ -111,7 +111,7 @@ if [ $TARGET = "linux_x64" ] || [ $TARGET = "all" ]; then
     echo "linux64 payload"
     downloadExtractGz $ARCHIVE_LINUX64
     cp ./$EEP_PACKAGE_DIR/*.eep $TEMP_DIR/ESP_Packages
-    addLogoAndConfig $TEMP_DIR/ESP_Packages
+    addLogoAndConfig $TEMP_DIR
     tar -czf ${EEF_PACKAGE_DIR}/${BASE_NAME_LINUX64}_${NAME}.tar.gz -C $TEMP_DIR .
 fi
 
